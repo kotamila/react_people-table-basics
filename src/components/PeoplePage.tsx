@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { PeopleTable } from './Loader/PopleTable';
+import { PeopleTable } from './PopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const loadPeople = async () => {
     setLoading(true);
     setError(null);
@@ -45,7 +46,11 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !error && people.length > 0 && (
-            <PeopleTable people={people} />
+            <PeopleTable
+              people={people}
+              selectedSlug={selectedSlug}
+              onSelectPerson={setSelectedSlug}
+            />
           )}
         </div>
       </div>

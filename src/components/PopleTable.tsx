@@ -1,12 +1,18 @@
 import React from 'react';
-import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
+  selectedSlug: string | null;
+  onSelectPerson: (slug: string) => void;
 }
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({
+  people,
+  selectedSlug,
+  onSelectPerson,
+}) => {
   return (
     <table
       data-cy="peopleTable"
@@ -25,7 +31,15 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <tr data-cy="person" key={person.slug}>
+          <tr
+            data-cy="person"
+            key={person.slug}
+            className={
+              person.slug === selectedSlug ? 'has-background-warning' : ''
+            }
+            onClick={() => onSelectPerson(person.slug)}
+            style={{ cursor: 'pointer' }}
+          >
             <td>
               <PersonLink name={person.name} allPeople={people} />
             </td>
