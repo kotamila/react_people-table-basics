@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
+import { PeopleTable } from './Loader/PopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -44,36 +45,7 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !error && people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <tr data-cy="person" key={person.slug}>
-                    <td>
-                      <a href={`#/people/${person.slug}`}></a>
-                    </td>
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>{person.motherName || '-'}</td>
-                    <td>{person.fatherName || '-'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
