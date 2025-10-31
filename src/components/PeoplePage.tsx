@@ -3,12 +3,19 @@ import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from './PopleTable';
+import { useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { slug } = useParams();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedSlug(slug || null);
+  }, [slug]);
+
   const loadPeople = async () => {
     setLoading(true);
     setError(null);

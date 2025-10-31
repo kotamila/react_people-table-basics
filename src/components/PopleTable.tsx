@@ -49,10 +49,10 @@ export const PeopleTable: React.FC<Props> = ({
             <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
-              <PersonLink name={person.motherName} allPeople={people} />
+              <PersonLink name={person.motherName} allPeople={allPeople} />
             </td>
             <td>
-              <PersonLink name={person.fatherName} allPeople={people} />
+              <PersonLink name={person.fatherName} allPeople={allPeople} />
             </td>
           </tr>
         ))}
