@@ -18,7 +18,10 @@ export const PersonLink: React.FC<Props> = ({ name, allPeople }) => {
   }
 
   return (
-    <a href={`#/people/${person.slug}`} className="has-text-danger">
+    <a
+      href={`#/people/${person.slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : 'has-text-link'}
+    >
       {person.name}
     </a>
   );
