@@ -21,7 +21,7 @@ export const PeopleTable: React.FC<Props> = ({
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>
-        <tr data-cy="person">
+        <tr>
           <th>Name</th>
           <th>Sex</th>
           <th>Born</th>
