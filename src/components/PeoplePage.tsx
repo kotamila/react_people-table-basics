@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { PeopleTable } from './PopleTable';
-import { useParams } from 'react-router-dom';
+import { PeopleTable } from './PeopleTable';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -15,6 +15,8 @@ export const PeoplePage = () => {
   useEffect(() => {
     setSelectedSlug(slug || null);
   }, [slug]);
+
+  const navigate = useNavigate();
 
   const loadPeople = async () => {
     setLoading(true);
@@ -34,6 +36,10 @@ export const PeoplePage = () => {
   useEffect(() => {
     loadPeople();
   }, []);
+
+  const handleSelectPerson = (newSlug: string) => {
+    navigate(`/people/${newSlug}`);
+  };
 
   return (
     <>
@@ -57,7 +63,7 @@ export const PeoplePage = () => {
               people={people}
               allPeople={people}
               selectedSlug={selectedSlug}
-              onSelectPerson={setSelectedSlug}
+              onSelectPerson={handleSelectPerson}
             />
           )}
         </div>
