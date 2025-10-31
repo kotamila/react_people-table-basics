@@ -4,12 +4,14 @@ import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
+  allPeople: Person[];
   selectedSlug: string | null;
   onSelectPerson: (slug: string) => void;
 }
 
 export const PeopleTable: React.FC<Props> = ({
   people,
+  allPeople,
   selectedSlug,
   onSelectPerson,
 }) => {
@@ -19,7 +21,7 @@ export const PeopleTable: React.FC<Props> = ({
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>
-        <tr>
+        <tr data-cy="person">
           <th>Name</th>
           <th>Sex</th>
           <th>Born</th>
@@ -41,7 +43,7 @@ export const PeopleTable: React.FC<Props> = ({
             style={{ cursor: 'pointer' }}
           >
             <td>
-              <PersonLink name={person.name} allPeople={people} />
+              <PersonLink name={person.name} allPeople={allPeople} />
             </td>
             <td>{person.sex}</td>
             <td>{person.born}</td>

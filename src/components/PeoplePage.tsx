@@ -4,6 +4,8 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from './PopleTable';
 
+const PEOPLE_PER_PAGE = 6;
+
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
@@ -28,6 +30,8 @@ export const PeoplePage = () => {
     loadPeople();
   }, []);
 
+  const visiblePeople = people.slice(0, PEOPLE_PER_PAGE);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -47,7 +51,8 @@ export const PeoplePage = () => {
 
           {!loading && !error && people.length > 0 && (
             <PeopleTable
-              people={people}
+              people={visiblePeople}
+              allPeople={people}
               selectedSlug={selectedSlug}
               onSelectPerson={setSelectedSlug}
             />
