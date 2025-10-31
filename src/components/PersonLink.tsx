@@ -3,19 +3,12 @@ import { Person } from '../types';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  name: string | null;
-  allPeople: Person[];
+  person: Person | null | undefined;
 }
 
-export const PersonLink: React.FC<Props> = ({ name, allPeople }) => {
-  if (!name) {
-    return <>-</>;
-  }
-
-  const person = allPeople.find(p => p.name === name);
-
+export const PersonLink: React.FC<Props> = ({ person }) => {
   if (!person) {
-    return <>{name}</>;
+    return null;
   }
 
   return (
